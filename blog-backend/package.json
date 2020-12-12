@@ -5,10 +5,13 @@
   "license": "MIT",
   "dependencies": {
     "@hapi/joi": "^17.1.1",
+    "@koa/cors": "^3.1.0",
     "bcrypt": "^5.0.0",
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "eslint-config-prettier": "^7.0.0",
     "esm": "^3.2.25",
+    "helmet": "^4.2.0",
     "jsonwebtoken": "^8.5.1",
     "koa": "^2.13.0",
     "koa-bodyparser": "^4.3.0",
