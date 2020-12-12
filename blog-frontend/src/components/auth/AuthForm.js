@@ -1,65 +1,99 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from '../common/Button.js';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import palette from '../../lib/styles/palette.js';
 
 const AuthFormBlock = styled.div`
-    h3{
-        margin: 0;
-        color: ${palette.gray[8]};
-        margin-bottom: 1rem;
-    }
+  h3 {
+    margin: 0;
+    color: ${palette.gray[8]};
+    margin-bottom: 1rem;
+  }
 `;
 
 const StyledInput = styled.input`
-    font-size: 1rem;
-    border: none;
-    outline: none;
-    border-bottom: 1px solid ${palette.gray[5]};
-    padding-bottom: 0.5rem;
-    width: 100%;
-    &:focus{
-        color: $oc-teal-7;
-        border-bottom: 1px solid ${palette.gray[7]};
-    };
-    &+&{
-        margin-top: 1rem;
-    }
+  font-size: 1rem;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid ${palette.gray[5]};
+  padding-bottom: 0.5rem;
+  width: 100%;
+  &:focus {
+    color: $oc-teal-7;
+    border-bottom: 1px solid ${palette.gray[7]};
+  }
+  & + & {
+    margin-top: 1rem;
+  }
 `;
 
 const Footer = styled.div`
-    margin-top: 2rem;
-    text-align: right;
-    a{
-        color: ${palette.gray[6]};
-        text-decoration: underline;
-        &:hover{
-            color: ${palette.gray[9]}
-        }
+  margin-top: 2rem;
+  text-align: right;
+  a {
+    color: ${palette.gray[6]};
+    text-decoration: underline;
+    &:hover {
+      color: ${palette.gray[9]};
     }
+  }
 `;
 
 const ButtonMarginTop = styled(Button)`
-    margin-top: 1rem;
-`
+  margin-top: 1rem;
+`;
 
-const AuthForm = () => {
-    return (
-        <AuthFormBlock>
-            <h3>로그인</h3>
-            <form>
-                <StyledInput autoComplete = "username" name = "username" placeholder = "아이디"/>
-                <StyledInput autoComplete = "new-password" name = "password" placeholder = "비밀번호"
-                type = "password"
-                />
-                <ButtonMarginTop cyan fullWidth>로그인</ButtonMarginTop>
-            </form>
-            <Footer>
-                <Link to = "/register">회원가입</Link>
-            </Footer>
-        </AuthFormBlock>
-        )
-}
+const textMap = {
+  login: '로그인',
+  register: '회원가입',
+};
 
-export default AuthForm
+const AuthForm = ({ type, form, onChange, onSubmit }) => {
+  const text = textMap[type];
+
+  return (
+    <AuthFormBlock>
+      <h3>{text}</h3>
+      <form onSubmit={onSubmit}>
+        <StyledInput
+          autoComplete="username"
+          name="username"
+          placeholder="아이디"
+          onChange={onChange}
+          value={form.username}
+        />
+        <StyledInput
+          autoComplete="new-password"
+          name="password"
+          placeholder="비밀번호"
+          type="password"
+          onChange={onChange}
+          value={form.password}
+        />
+        {type === 'register' && (
+          <StyledInput
+            autoComplete="new-passowrd"
+            name="passwordConfirm"
+            placeholder="비밀번호 확인"
+            type="password"
+            onChange={onChange}
+            value={form.passwordConfirm}
+          />
+        )}
+        <ButtonMarginTop cyan fullWidth>
+          {text}
+        </ButtonMarginTop>
+      </form>
+      <Footer>
+        {type === 'register' ? (
+          <Link to="/login">로그인</Link>
+        ) : (
+          <Link to="/register">회원가입</Link>
+        )}
+      </Footer>
+    </AuthFormBlock>
+  );
+};
+
+export default AuthForm;
