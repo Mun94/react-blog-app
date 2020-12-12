@@ -2,13 +2,15 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { changeField, initializeForm, register } from '../modules/auth.js';
 import AuthForm from '../components/auth/AuthForm.js';
+import { check } from '../modules/user';
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
-  const { form, auth, authError } = useSelector(({ auth }) => ({
+  const { form, auth, authError, user } = useSelector(({ auth, user }) => ({
     form: auth.register,
     auth: auth.auth,
     authError: auth.authError,
+    user: user.user,
   }));
 
   const onChange = (e) => {
@@ -38,8 +40,15 @@ const RegisterForm = () => {
     }
     if (auth) {
       console.log(auth);
+      dispatch(check());
     }
-  }, [auth, authError]);
+  }, [dispatch, auth, authError]);
+
+  useEffect(() => {
+    if (user) {
+      console.log(user);
+    }
+  }, [user]);
 
   return (
     <AuthForm
