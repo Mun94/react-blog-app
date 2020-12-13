@@ -1,7 +1,8 @@
 import React from 'react';
+import Editor from '../components/write/Editor.js';
 
 const WritePage = () => {
-  return <div>글쓰기</div>;
+  return <Editor />;
 };
 
 export default WritePage;
