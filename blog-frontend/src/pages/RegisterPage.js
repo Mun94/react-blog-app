@@ -1,6 +1,6 @@
 import React from 'react';
-import RegisterForm from '../containers/RegisterForm.js';
-import AuthTemplate from '../components/auth/AuthTemplate.js';
+import AuthTemplate from '../components/auth/AuthTemplate';
+import RegisterForm from '../containers/auth/RegisterForm';
 
 const RegisterPage = () => {
   return (

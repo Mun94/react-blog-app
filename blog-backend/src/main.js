@@ -5,6 +5,8 @@ import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
 import mongoose from 'mongoose';
 import cors from '@koa/cors';
+import api from './api';
+import jwtMiddleware from './lib/jwtMiddleware.js';
 
 const { PORT, MONGO_URI } = process.env;
 
@@ -28,25 +30,18 @@ mongoose.connection.on('disconnected', () => {
   connect();
 });
 
-import api from './api';
-import jwtMiddleware from './lib/jwtMiddleware.js';
-
 const app = new Koa();
 const router = new Router();
-const corsOptions = {
-  origin: 'http://localhost:3000',
-  credentials: true,
-};
 
 router.use('/api', api.routes());
 
-app.use(cors(corsOptions));
-app.use(bodyParser());
 app.use(jwtMiddleware);
+app.use(cors());
+app.use(bodyParser());
 
 app.use(router.routes()).use(router.allowedMethods());
 
-const port = PORT || 4000;
+const port = PORT || 4001;
 app.listen(port, () => {
-  console.log('Listening to port 4000');
+  console.log(`Listening to ${port}`);
 });

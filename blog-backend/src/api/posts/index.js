@@ -7,7 +7,19 @@ const posts = new Router();
 posts.get('/', postCtrl.list);
 posts.post('/', checkLoggedIn, postCtrl.write);
 posts.get('/:id', postCtrl.checkObjectId, postCtrl.read);
-posts.delete('/:id', checkLoggedIn, postCtrl.checkObjectId, postCtrl.checkOwnPost, postCtrl.remove);
-posts.patch('/:id', checkLoggedIn, postCtrl.checkObjectId, postCtrl.checkOwnPost, postCtrl.update);
+posts.delete(
+  '/:id',
+  checkLoggedIn,
+  postCtrl.checkObjectId,
+  postCtrl.checkOwnPost,
+  postCtrl.remove,
+);
+posts.patch(
+  '/:id',
+  checkLoggedIn,
+  postCtrl.checkObjectId,
+  postCtrl.checkOwnPost,
+  postCtrl.update,
+);
 
-export default posts
+export default posts;

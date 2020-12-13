@@ -1,8 +1,8 @@
-require('dotenv').config();
+import jwt from 'jsonwebtoken';
+import User from '../models/user';
 
 const jwtMiddleware = async (ctx, next) => {
   const token = ctx.cookies.get('access_token');
-  console.log('token>>.', token);
   if (!token) return next(); // 토큰이 없음
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);

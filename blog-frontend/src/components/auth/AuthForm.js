@@ -1,8 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import Button from '../common/Button.js';
 import { Link } from 'react-router-dom';
-import palette from '../../lib/styles/palette.js';
+import palette from '../../lib/styles/palette';
+import Button from '../common/Button';
+
+/**
+ * 회원가입 또는 로그인 폼을 보여줍니다.
+ */
 
 const AuthFormBlock = styled.div`
   h3 {
@@ -12,12 +16,15 @@ const AuthFormBlock = styled.div`
   }
 `;
 
+/**
+ * 스타일링된 input
+ */
 const StyledInput = styled.input`
   font-size: 1rem;
   border: none;
-  outline: none;
   border-bottom: 1px solid ${palette.gray[5]};
   padding-bottom: 0.5rem;
+  outline: none;
   width: 100%;
   &:focus {
     color: $oc-teal-7;
@@ -28,6 +35,9 @@ const StyledInput = styled.input`
   }
 `;
 
+/**
+ * 폼 하단에 로그인 혹은 회원가입 링크를 보여줌
+ */
 const Footer = styled.div`
   margin-top: 2rem;
   text-align: right;
@@ -40,18 +50,27 @@ const Footer = styled.div`
   }
 `;
 
-const ButtonMarginTop = styled(Button)`
+const ButtonWithMarginTop = styled(Button)`
   margin-top: 1rem;
 `;
 
 const textMap = {
   login: '로그인',
-  register: '회원가입',
+  register: '회원가입'
 };
 
-const AuthForm = ({ type, form, onChange, onSubmit }) => {
-  const text = textMap[type];
+/**
+ * 에러를 보여줍니다
+ */
+const ErrorMessage = styled.div`
+  color: red;
+  text-align: center;
+  font-size: 0.875rem;
+  margin-top: 1rem;
+`;
 
+const AuthForm = ({ type, form, onChange, onSubmit, error }) => {
+  const text = textMap[type];
   return (
     <AuthFormBlock>
       <h3>{text}</h3>
@@ -73,7 +92,7 @@ const AuthForm = ({ type, form, onChange, onSubmit }) => {
         />
         {type === 'register' && (
           <StyledInput
-            autoComplete="new-passowrd"
+            autoComplete="new-password"
             name="passwordConfirm"
             placeholder="비밀번호 확인"
             type="password"
@@ -81,15 +100,16 @@ const AuthForm = ({ type, form, onChange, onSubmit }) => {
             value={form.passwordConfirm}
           />
         )}
-        <ButtonMarginTop cyan fullWidth>
+        {error && <ErrorMessage>{error}</ErrorMessage>}
+        <ButtonWithMarginTop cyan fullWidth style={{ marginTop: '1rem' }}>
           {text}
-        </ButtonMarginTop>
+        </ButtonWithMarginTop>
       </form>
       <Footer>
-        {type === 'register' ? (
-          <Link to="/login">로그인</Link>
-        ) : (
+        {type === 'login' ? (
           <Link to="/register">회원가입</Link>
+        ) : (
+          <Link to="/login">로그인</Link>
         )}
       </Footer>
     </AuthFormBlock>

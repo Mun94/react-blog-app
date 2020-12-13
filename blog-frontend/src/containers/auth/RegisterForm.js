@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { changeField, initializeForm, register } from '../modules/auth.js';
-import AuthForm from '../components/auth/AuthForm.js';
-import { check } from '../modules/user';
+import { changeField, initializeForm, register } from '../../modules/auth.js';
+import AuthForm from '../../components/auth/AuthForm.js';
+import { check } from '../../modules/user';
 
 const RegisterForm = () => {
   const dispatch = useDispatch();
