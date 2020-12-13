@@ -1,10 +1,10 @@
 import React from 'react';
-import Header from '../components/common/Header.js';
+import HeaderContainer from '../containers/common/HeaderContainer.js';
 
 const PostListPage = () => {
   return (
     <>
-      <Header />
+      <HeaderContainer />
       <div>aa</div>
     </>
   );
