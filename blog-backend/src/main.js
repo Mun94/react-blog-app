@@ -38,11 +38,11 @@ const corsOptions = {
   credentials: true,
 };
 
+router.use('/api', api.routes());
+
 app.use(cors(corsOptions));
 app.use(bodyParser());
 app.use(jwtMiddleware);
-
-router.use('/api', api.routes());
 
 app.use(router.routes()).use(router.allowedMethods());
 

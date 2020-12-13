@@ -33,8 +33,9 @@ export const register = async (ctx) => {
     ctx.body = user.serialize();
 
     const token = user.generateToken();
+
     ctx.cookies.set('access_token', token, {
-      maxAge: 1000 * 60 * 60 * 24 * 7,
+      maxAge: 1000 * 60 * 60 * 24 * 7, // 7일
       httpOnly: true,
     });
   } catch (e) {
@@ -69,13 +70,19 @@ export const login = async (ctx) => {
 };
 
 export const check = async (ctx) => {
-  const { user } = ctx.state;
-  if (!user) {
-    // 로그인중 아님
-    ctx.status = 401; // Unauthorized
-    return;
+  try {
+    const { user } = ctx.state;
+    console.log('user>>>', user);
+    if (!user) {
+      // 로그인중 아님
+      ctx.status = 401; // Unauthorized
+      return;
+    }
+    ctx.body = user;
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
-  ctx.body = user;
 };
 
 export const logout = async (ctx) => {
