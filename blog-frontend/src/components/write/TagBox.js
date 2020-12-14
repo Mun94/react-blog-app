@@ -67,8 +67,9 @@ const TagItem = React.memo(({ tag, onRemove, onChangeTags }) => (
 // React.memo를 사용하여 tags 값이 바뀔 때만 리렌더링되도록 처리
 const TagList = React.memo(({ tags, onRemove }) => (
   <TagListBlock>
-    {tags &&
-      tags.map((tag) => <TagItem key={tag} tag={tag} onRemove={onRemove} />)}
+    {tags.map((tag) => (
+      <TagItem key={tag} tag={tag} onRemove={onRemove} />
+    ))}
   </TagListBlock>
 ));
 
@@ -79,7 +80,7 @@ const TagBox = ({ tags, onChangeTags }) => {
   const insertTag = useCallback(
     (tag) => {
       if (!tag) return; // 공백이라면 추가하지 않음
-      if (tag && localTags.includes(tag)) return; // 이미 존재한다면 추가하지 않음
+      if (localTags.includes(tag)) return; // 이미 존재한다면 추가하지 않음
       const nextTags = [...localTags, tag];
       setLocalTags(nextTags);
       onChangeTags(nextTags);

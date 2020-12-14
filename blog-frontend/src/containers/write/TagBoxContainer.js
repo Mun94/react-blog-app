@@ -5,9 +5,9 @@ import { changeField } from '../../modules/write';
 
 const TagBoxContainer = () => {
   const dispatch = useDispatch();
-  const tags = useSelector((state) => state.write.tags);
+  const tags = useSelector(state => state.write.tags);
 
-  const onChangeTags = (nextTags) => {
+  const onChangeTags = nextTags => {
     dispatch(
       changeField({
         key: 'tags',
