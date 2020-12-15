@@ -6,11 +6,12 @@ const posts = new Router();
 
 posts.get('/', postCtrl.list);
 posts.post('/', checkLoggedIn, postCtrl.write);
-posts.get('/:id', postCtrl.checkObjectId, postCtrl.read);
+posts.get('/:id', postCtrl.checkObjectId, postCtrl.getPostById, postCtrl.read);
 posts.delete(
   '/:id',
   checkLoggedIn,
   postCtrl.checkObjectId,
+  postCtrl.getPostById,
   postCtrl.checkOwnPost,
   postCtrl.remove,
 );
@@ -18,6 +19,7 @@ posts.patch(
   '/:id',
   checkLoggedIn,
   postCtrl.checkObjectId,
+  postCtrl.getPostById,
   postCtrl.checkOwnPost,
   postCtrl.update,
 );
