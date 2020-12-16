@@ -4,7 +4,7 @@
 # 리액트를 다루는 기술   
 ## <a href="https://1drv.ms/u/s!AgLYazaFR-l8lARj7nXuJZQ9PB7o?e=Ozxcau" target='_blank'>One Note</a>   
 
-1장 리액트 시작(/////)   
+1장 리액트 시작(//////)   
   >1.1 왜 리액트인가?   
   1.2 리액트의 특징   
   1.3 작업 환경 설정   
